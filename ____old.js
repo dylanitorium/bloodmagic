@@ -10,7 +10,7 @@ const COMMAND = process.env.COMMAND;
 
 const service = express();
 service.get('*', (request, response) => {
-  response.attachment('export.sql.gz');
+  response.attachment('export.sql');
   const stream = new through();
   rexec(
     [
@@ -27,7 +27,7 @@ service.get('*', (request, response) => {
     },
     () => response.end()
   );
-  stream.pipe(new createGzip()).pipe(response);
+  stream.pipe(response);
 });
 service.listen(PORT);
 

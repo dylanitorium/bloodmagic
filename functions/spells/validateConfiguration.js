@@ -1,3 +1,7 @@
+/**
+ * Validate that the user owns this configuration
+ * @param admin
+ */
 module.exports = (admin) => (
   (req, res, next) => {
     const {
