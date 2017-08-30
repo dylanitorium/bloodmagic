@@ -1,6 +1,7 @@
 // Native
 const PassThrough = require('stream').PassThrough;
 const os = require('os');
+const fs = require('fs');
 const path = require('path');
 const createGzip = require('zlib').createGzip;
 
@@ -13,7 +14,7 @@ const rexec = require('remote-exec');
  * @param artifactName
  * @returns {Promise}
  */
-async function mysqlArtifact(firebaseApp, artifactConfiguration, artifactName) {
+function mysqlArtifact(firebaseApp, artifactConfiguration, artifactName) {
   const {
     key,
     host,
@@ -32,28 +33,6 @@ async function mysqlArtifact(firebaseApp, artifactConfiguration, artifactName) {
 
   const stream = new PassThrough();
 
-  const baseConnectionOptions = {
-    port: 22,
-    username: hostUser,
-    stdout: stream,
-  };
-
-  let connectionOptions;
-  if (hostAuthMethod === 'key') {
-    const privateKeyReadStream = await getSshConnectionOptions(firebaseApp, user, hostSshKey);
-    connectionOptions = {
-      ...baseConnectionOptions,
-      privateKey: privateKeyReadStream,
-    };
-  } else if (hostAuthMethod === 'password') {
-    connectionOptions = {
-      ...baseConnectionOptions,
-      password: hostPassword,
-    };
-  } else {
-    throw new Error('Invalid host authentication method');
-  }
-
   const remoteCommand = [
     (mysqlDocker) ? ['docker', 'exec', mysqlDockerName ].join(' ') : '',
     'mysqldump',
@@ -70,20 +49,56 @@ async function mysqlArtifact(firebaseApp, artifactConfiguration, artifactName) {
   const artifactWriteStream = reference.createWriteStream();
   const gzipTransformStream = new createGzip();
 
-  rexec(
-    [ host ],
-    [ remoteCommand ],
-    connectionOptions,
-    () => stream.end(),
-  );
+  const baseConnectionOptions = {
+    port: 22,
+    username: hostUser,
+    stdout: stream,
+  };
 
-  stream.pipe(gzipTransformStream).pipe(artifactWriteStream);
 
-  return new Promise((resolve, reject) => {
-    stream
-      .on('error', reject)
-      .on('finish', resolve)
-  });
+  /**
+   * There is no async / await in the node v6.11 run time so start a promise chain
+   * so we can get some stuff from another promise without having to have the duplication of code
+   * or creating other superfluous functions that will need a bunch of arguments passed through
+   */
+  return Promise.resolve()
+    .then(() => {
+      if (hostAuthMethod === 'key') {
+        return getPrivateKey(firebaseApp, user, hostSshKey)
+          // Object assign because there is no spread operators in node v6.11
+          .then((privateKeyBuffer) => (Object.assign({}, baseConnectionOptions, {
+              privateKey: privateKeyBuffer,
+            })));
+      } else if (hostAuthMethod === 'password') {
+        // Object assign because there is no spread operators in node v6.11
+        return Object.assign({}, baseConnectionOptions, {
+          password: hostPassword,
+        });
+      } else {
+        throw new Error(`Invalid host authentication method - ${hostAuthMethod}`);
+      }
+    })
+    .then((connectionOptions) => {
+      rexec(
+        [ host ],
+        [ remoteCommand ],
+        connectionOptions,
+        (error) => {
+          if (error) {
+            throw error;
+          }
+          stream.end();
+        }
+      );
+
+      stream.pipe(gzipTransformStream).pipe(artifactWriteStream);
+
+      return new Promise((resolve, reject) => {
+        stream
+          .on('error', reject)
+          .on('finish', resolve)
+      });
+    });
 }
 
 /**
@@ -92,7 +107,7 @@ async function mysqlArtifact(firebaseApp, artifactConfiguration, artifactName) {
  * @param hostSshKey
  * @returns {Promise}
  */
-async function getSshConnectionOptions(firebaseApp, user, hostSshKey) {
+function getPrivateKey(firebaseApp, user, hostSshKey) {
   const referencePath = [ user, 'keys', hostSshKey ].join('/');
   const reference = firebaseApp.storage().bucket().file(referencePath);
   const localPath = path.resolve(os.tmpdir(), 'key');
@@ -106,7 +121,7 @@ async function getSshConnectionOptions(firebaseApp, user, hostSshKey) {
       }
       return resolve();
     });
-  });
+  }).then(() => fs.readFileSync(localPath));
 }
 
 /**
@@ -114,7 +129,7 @@ async function getSshConnectionOptions(firebaseApp, user, hostSshKey) {
  * @returns {*}
  */
 function getArtifactTypeFromConfiguration(artifactConfiguration) {
-  return artifactConfiguration.exportConfigType;
+  return artifactConfiguration.configExportType;
 }
 
 /**
@@ -125,7 +140,7 @@ function getExportFunctionForArtifactType(artifactType) {
   if (artifactType === 'mysql') {
     return mysqlArtifact;
   } else {
-    throw new Error('Invalid artifact type');
+    throw new Error(`Invalid artifact type - ${artifactType}`);
   }
 }
 
@@ -151,7 +166,7 @@ function getArtifactKeyFromRequest(request) {
 function setArtifactRecordAsSuccessful(firebaseApp, artifactName) {
   const referencePath = `artifacts/${artifactName}`;
   const reference = firebaseApp.database().ref(referencePath);
-  reference.set({
+  return reference.update({
     status: 'complete',
   });
 }
@@ -160,11 +175,11 @@ function setArtifactRecordAsSuccessful(firebaseApp, artifactName) {
  * @param firebaseApp
  * @param artifactName
  */
-function setArtifactRecordAsFailed(firebaseApp, artifactName) {
-  const referencePath = `artifacts/${artifactName}`;
+function setArtifactRecordAsFailed(firebaseApp, artifactKey) {
+  const referencePath = `artifacts/${artifactKey}`;
   const reference = firebaseApp.database().ref(referencePath);
-  reference.set({
-    status: 'complete',
+  return reference.update({
+    status: 'failed',
   });
 }
 
@@ -173,22 +188,22 @@ function setArtifactRecordAsFailed(firebaseApp, artifactName) {
  */
 module.exports = (firebaseApp) => (
   (request, response) => {
+    const artifactConfiguration = getArtifactConfigurationFromRequest(request);
+    const artifactKey = getArtifactKeyFromRequest(request);
+    const artifactType = getArtifactTypeFromConfiguration(artifactConfiguration);
     try {
-      const artifactConfiguration = getArtifactConfigurationFromRequest(request);
-      const artifactKey = getArtifactKeyFromRequest(request);
-      const artifactType = getArtifactTypeFromConfiguration(artifactConfiguration);
       const method = getExportFunctionForArtifactType(artifactType);
       const result = method(firebaseApp, artifactConfiguration, artifactKey);
       result.then(() => {
-        setArtifactRecordAsSuccessful(firebaseApp, artifactConfiguration);
+        setArtifactRecordAsSuccessful(firebaseApp, artifactKey);
         response.status(200).end();
       });
-      result.catch(() => {
-        setArtifactRecordAsFailed(firebaseApp, artifactConfiguration);
+      result.catch((error) => {
+        setArtifactRecordAsFailed(firebaseApp, artifactKey);
         response.status(500).send(error.message);
       });
     } catch (error) {
-      setArtifactRecordAsFailed(firebaseApp, artifactConfiguration);
+      setArtifactRecordAsFailed(firebaseApp, artifactKey);
       response.status(500).send(error.message);
     }
   }
