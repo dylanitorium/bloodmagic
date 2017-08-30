@@ -10,5 +10,8 @@
     "moment": "^2.18.1",
     "remote-exec": "0.0.3"
   },
-  "private": true
+  "private": true,
+  "engines": {
+    "node": "8.x"
+  }
 }
