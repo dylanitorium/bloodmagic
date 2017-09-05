@@ -7,6 +7,7 @@ const createGzip = require('zlib').createGzip;
 
 // NPM
 const rexec = require('remote-exec');
+const moment = require('moment');
 
 /**
  * @param firebaseApp
@@ -55,7 +56,6 @@ function mysqlArtifact(firebaseApp, artifactConfiguration, artifactName) {
     stdout: stream,
   };
 
-
   /**
    * There is no async / await in the node v6.11 run time so start a promise chain
    * so we can get some stuff from another promise without having to have the duplication of code
@@ -95,8 +95,11 @@ function mysqlArtifact(firebaseApp, artifactConfiguration, artifactName) {
 
       return new Promise((resolve, reject) => {
         stream
+          .on('error', reject);
+
+        artifactWriteStream
           .on('error', reject)
-          .on('finish', resolve)
+          .on('finish', () => resolve(referencePath));
       });
     });
 }
@@ -153,21 +156,21 @@ function getArtifactConfigurationFromRequest(request) {
 }
 
 /**
- * @param request
- */
-function getArtifactKeyFromRequest(request) {
-  return request.body.key;
-}
-
-/**
  * @param firebaseApp
  * @param artifactName
+ * @param fileReferencePath
  */
-function setArtifactRecordAsSuccessful(firebaseApp, artifactName) {
+function setArtifactRecordAsSuccessful(firebaseApp, artifactName, fileReferencePath) {
   const referencePath = `artifacts/${artifactName}`;
-  const reference = firebaseApp.database().ref(referencePath);
-  return reference.update({
-    status: 'complete',
+  const dataReference = firebaseApp.database().ref(referencePath);
+  const fileReference = firebaseApp.storage().bucket().file(fileReferencePath);
+
+  return fileReference.getMetadata().then((data) => {
+    const metadata = data[0];
+    return dataReference.update({
+      metadata,
+      status: 'complete',
+    });
   });
 }
 
@@ -184,27 +187,61 @@ function setArtifactRecordAsFailed(firebaseApp, artifactKey) {
 }
 
 /**
+ *
+ * @param artifactConfiguration
+ */
+function createArtifactKeyFromConfiguration(artifactConfiguration) {
+  const { key } = artifactConfiguration;
+  return [key, '_', moment().format('HHmmssDDMMYYYY')].join('');
+}
+
+/**
+ * @param artifactKey
+ * @returns {Promise}
+ */
+function createArtifactRecord(firebaseApp, artifactConfiguration, artifactKey) {
+  const {
+    key,
+    user,
+  } = artifactConfiguration;
+
+  const record = {
+    key: artifactKey,
+    status: 'pending',
+    user,
+    configuration: key,
+  };
+
+  const referencePath = `artifacts/${artifactKey}`;
+  const reference = firebaseApp.database().ref(referencePath);
+  return reference.set(record);
+}
+
+/**
+ * 1. Create a record with a pending status
+ * 2. Do the actual export
+ * 3. Update the record
+ *
  * @param firebaseApp
  */
 module.exports = (firebaseApp) => (
   (request, response) => {
     const artifactConfiguration = getArtifactConfigurationFromRequest(request);
-    const artifactKey = getArtifactKeyFromRequest(request);
-    const artifactType = getArtifactTypeFromConfiguration(artifactConfiguration);
-    try {
-      const method = getExportFunctionForArtifactType(artifactType);
-      const result = method(firebaseApp, artifactConfiguration, artifactKey);
-      result.then(() => {
-        setArtifactRecordAsSuccessful(firebaseApp, artifactKey);
-        response.status(200).end();
-      });
-      result.catch((error) => {
+    const artifactKey = createArtifactKeyFromConfiguration(artifactConfiguration);
+    createArtifactRecord(firebaseApp, artifactConfiguration, artifactKey)
+      .then(() => {
+        const artifactType = getArtifactTypeFromConfiguration(artifactConfiguration);
+        const method = getExportFunctionForArtifactType(artifactType);
+        return method(firebaseApp, artifactConfiguration, artifactKey);
+      })
+      .then((fileReferencePath) => {
+        return setArtifactRecordAsSuccessful(firebaseApp, artifactKey, fileReferencePath);
+      })
+      .then(() => response.status(200).end())
+      .catch((error) => {
+        console.error(error);
         setArtifactRecordAsFailed(firebaseApp, artifactKey);
         response.status(500).send(error.message);
       });
-    } catch (error) {
-      setArtifactRecordAsFailed(firebaseApp, artifactKey);
-      response.status(500).send(error.message);
-    }
   }
 );
