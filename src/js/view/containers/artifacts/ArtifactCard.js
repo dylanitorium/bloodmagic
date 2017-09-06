@@ -2,11 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, Dimmer, Loader, Dropdown, Icon } from 'semantic-ui-react';
 import moment from 'moment';
-import { deleteArtifact } from '../../../state/artifacts/actions';
+import { deleteArtifact, downloadArtifact } from '../../../state/artifacts/actions';
 
 const ArtifactCard = ({
   artifact: { key, metadata, status },
-  deleteArtifact
+  deleteArtifact,
+  downloadArtifact
 }) => {
   let size = 'Size unknown';
   let time = 'Creating...'
@@ -18,7 +19,7 @@ const ArtifactCard = ({
   const loader = (status) === 'pending' ? <Loader size="tiny" inline active /> : '';
 
   const options = [
-    { key: 'download', text: 'Download' },
+    { key: 'download', text: 'Download', onClick: () => downloadArtifact(key) },
     { key: 'delete', text: 'Delete', onClick: () => deleteArtifact(key) }
   ];
 
@@ -42,6 +43,7 @@ const ArtifactCard = ({
 export default connect(
   () => ({}),
   {
-    deleteArtifact
+    deleteArtifact,
+    downloadArtifact
   }
 )(ArtifactCard);

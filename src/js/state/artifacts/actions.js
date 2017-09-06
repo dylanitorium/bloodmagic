@@ -90,7 +90,7 @@ export const createArtifact = (key) => (
       .then(() => firebase.auth().currentUser.getIdToken(true))
       // Trigger the HTTP function
       .then((token) => (
-        fetch('http://localhost:5001/bloodmagic-ff7cb/us-central1/app', {
+        fetch('https://us-central1-bloodmagic-ff7cb.cloudfunctions.net/createExport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -154,5 +154,17 @@ export const deleteArtifact = (key) => (
     }).catch((errors) => {
       dispatch(deleteArtifactSuccess(errors[0]));
     });
+  }
+);
+
+/**
+ * This is just here cause
+ */
+export const downloadArtifact = (key) => (
+  (dispatch, getState) => {
+    firebase.auth().currentUser.getIdToken(true)
+      .then((token) => {
+        window.location = `https://us-central1-bloodmagic-ff7cb.cloudfunctions.net/downloadExport?token=${encodeURIComponent(token)}&artifact=${encodeURIComponent(key)}`;
+      });
   }
 );
