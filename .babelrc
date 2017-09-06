@@ -1,0 +1,23 @@
+{
+  "presets": [
+    "es2015",
+    "react",
+    "stage-0"
+  ],
+  "plugins": [
+    ["module-alias", [
+      {
+        "src": "./src/js/state",
+        "expose": "state"
+      },
+      {
+        "src": "./src/js/view",
+        "expose": "view"
+      },
+      {
+        "src": "./src/js/lib/semantic-upload-field",
+        "expose": "semantic-upload-field"
+      }
+    ]]
+  ]
+}

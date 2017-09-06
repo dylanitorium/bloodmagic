@@ -1,2 +1,2 @@
-# bloodmagic
-Backs things up using ritual sacrifice
+# bloodmagic-client
+Get a part of the sacrficial action

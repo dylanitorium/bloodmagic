@@ -156,6 +156,14 @@ function getArtifactConfigurationFromRequest(request) {
 }
 
 /**
+ * @param request
+ * @returns {*}
+ */
+function getArtifactKeyFromRequest(request) {
+  return request.body.artifactKey;
+}
+
+/**
  * @param firebaseApp
  * @param artifactName
  * @param fileReferencePath
@@ -186,36 +194,6 @@ function setArtifactRecordAsFailed(firebaseApp, artifactKey) {
   });
 }
 
-/**
- *
- * @param artifactConfiguration
- */
-function createArtifactKeyFromConfiguration(artifactConfiguration) {
-  const { key } = artifactConfiguration;
-  return [key, '_', moment().format('HHmmssDDMMYYYY')].join('');
-}
-
-/**
- * @param artifactKey
- * @returns {Promise}
- */
-function createArtifactRecord(firebaseApp, artifactConfiguration, artifactKey) {
-  const {
-    key,
-    user,
-  } = artifactConfiguration;
-
-  const record = {
-    key: artifactKey,
-    status: 'pending',
-    user,
-    configuration: key,
-  };
-
-  const referencePath = `artifacts/${artifactKey}`;
-  const reference = firebaseApp.database().ref(referencePath);
-  return reference.set(record);
-}
 
 /**
  * 1. Create a record with a pending status
@@ -227,16 +205,11 @@ function createArtifactRecord(firebaseApp, artifactConfiguration, artifactKey) {
 module.exports = (firebaseApp) => (
   (request, response) => {
     const artifactConfiguration = getArtifactConfigurationFromRequest(request);
-    const artifactKey = createArtifactKeyFromConfiguration(artifactConfiguration);
-    createArtifactRecord(firebaseApp, artifactConfiguration, artifactKey)
-      .then(() => {
-        const artifactType = getArtifactTypeFromConfiguration(artifactConfiguration);
-        const method = getExportFunctionForArtifactType(artifactType);
-        return method(firebaseApp, artifactConfiguration, artifactKey);
-      })
-      .then((fileReferencePath) => {
-        return setArtifactRecordAsSuccessful(firebaseApp, artifactKey, fileReferencePath);
-      })
+    const artifactKey = getArtifactKeyFromRequest(request);
+    const artifactType = getArtifactTypeFromConfiguration(artifactConfiguration);
+    const method = getExportFunctionForArtifactType(artifactType);
+    method(firebaseApp, artifactConfiguration, artifactKey)
+      .then((fileReferencePath) => (setArtifactRecordAsSuccessful(firebaseApp, artifactKey, fileReferencePath)))
       .then(() => response.status(200).end())
       .catch((error) => {
         console.error(error);

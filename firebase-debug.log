@@ -1,0 +1,36 @@
+[debug] [2017-09-05T23:57:02.169Z] ----------------------------------------------------------------------
+[debug] [2017-09-05T23:57:02.173Z] Command:       /Users/deadsalt/.nvm/versions/node/v6.11.2/bin/node /Users/deadsalt/.nvm/versions/node/v6.11.2/bin/firebase serve --only hosting,functions
+[debug] [2017-09-05T23:57:02.174Z] CLI Version:   3.10.0
+[debug] [2017-09-05T23:57:02.174Z] Platform:      darwin
+[debug] [2017-09-05T23:57:02.174Z] Node Version:  v6.11.2
+[debug] [2017-09-05T23:57:02.174Z] Time:          Wed Sep 06 2017 11:57:02 GMT+1200 (NZST)
+[debug] [2017-09-05T23:57:02.175Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-09-05T23:57:02.204Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-09-05T23:57:02.204Z] > authorizing via signed-in user
+[debug] [2017-09-05T23:57:02.207Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bloodmagic-ff7cb  
+ Wed Sep 06 2017 11:57:02 GMT+1200 (NZST)
+[debug] [2017-09-05T23:57:03.379Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-05T23:57:03.380Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bloodmagic-ff7cb/tokens  
+ Wed Sep 06 2017 11:57:03 GMT+1200 (NZST)
+[debug] [2017-09-05T23:57:04.300Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/deadsalt/Projects/bloodmagic/bloodmagic-spells'...
+[info] 
+[info] i  functions: Preparing to emulate HTTPS functions. Support for other event types coming soon.
+[debug] [2017-09-05T23:57:05.029Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/bloodmagic-ff7cb  
+ Wed Sep 06 2017 11:57:05 GMT+1200 (NZST)
+[debug] [2017-09-05T23:57:05.030Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/bloodmagic-ff7cb/apiKeys  
+ Wed Sep 06 2017 11:57:05 GMT+1200 (NZST)
+[debug] [2017-09-05T23:57:05.030Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/bloodmagic-ff7cb  
+ Wed Sep 06 2017 11:57:05 GMT+1200 (NZST)
+[debug] [2017-09-05T23:57:06.404Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-05T23:57:06.408Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-05T23:57:06.436Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-05T23:57:06.437Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/488936304462/clients/_:getWebAppConfig  
+ Wed Sep 06 2017 11:57:06 GMT+1200 (NZST)
+[debug] [2017-09-05T23:57:07.768Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist
+[info] ✔  hosting: Local server: http://localhost:5000
+
+[info] ✔  functions: app: http://localhost:5001/bloodmagic-ff7cb/us-central1/app
