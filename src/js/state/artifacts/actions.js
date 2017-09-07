@@ -113,6 +113,7 @@ export const createArtifact = (key) => (
       // Whatever happens, we are no longer fetching
       .then(() => dispatch(createArtifactSuccess()))
       .catch((error) => dispatch(createArtifactFailure(error)));
+
   }
 );
 
@@ -144,7 +145,10 @@ export const deleteArtifact = (key) => (
       }
     } = artifact;
 
-    const storagePromise = firebase.storage().ref().child(name).delete();
+    let storagePromise = Promise.resolve();
+    if (name) {
+      storagePromise = firebase.storage().ref().child(name).delete();
+    }
 
     Promise.all([
       databasePromise,

@@ -54,6 +54,7 @@ function mysqlArtifact(firebaseApp, artifactConfiguration, artifactName) {
     port: 22,
     username: hostUser,
     stdout: stream,
+    readyTimeout: 20000,
   };
 
   /**
@@ -79,21 +80,21 @@ function mysqlArtifact(firebaseApp, artifactConfiguration, artifactName) {
       }
     })
     .then((connectionOptions) => {
-      rexec(
-        [ host ],
-        [ remoteCommand ],
-        connectionOptions,
-        (error) => {
-          if (error) {
-            throw error;
-          }
-          stream.end();
-        }
-      );
-
-      stream.pipe(gzipTransformStream).pipe(artifactWriteStream);
-
       return new Promise((resolve, reject) => {
+        rexec(
+          [ host ],
+          [ remoteCommand ],
+          connectionOptions,
+          (error) => {
+            if (error) {
+              throw error;
+            }
+            stream.end();
+          }
+        );
+
+        stream.pipe(gzipTransformStream).pipe(artifactWriteStream);
+
         stream
           .on('error', reject);
 

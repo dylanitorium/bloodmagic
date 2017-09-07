@@ -3,9 +3,13 @@ import { Menu, Segment, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import ConfigurationHeader from './ConfigurationHeader';
 import ConfigurationsForm from './ConfigurationsForm'
+import DeleteConfiguration from './DeleteConfiguration';
 import ArtifactsList from '../artifacts/ArtifactsList';
 import { createArtifact } from '../../../state/artifacts/actions';
 
+const deleteStyle = {
+  borderColor: '#db2828',
+};
 
 // TODO add routes to tabs
 class EditConfiguration extends React.Component {
@@ -46,7 +50,7 @@ class EditConfiguration extends React.Component {
         return <ArtifactsList configuration={this.getConfiguration()} />;
         break;
       case 'delete':
-        return;
+        return <DeleteConfiguration configuration={this.getConfiguration()} />
         break;
     }
   }
@@ -71,7 +75,7 @@ class EditConfiguration extends React.Component {
     return (
       <div>
         <ConfigurationHeader />
-        <Menu attached="top" tabular>
+        <Menu attached="top" tabular style={this.isActiveTab('delete') ? deleteStyle : {}}>
           <Menu.Item name="config" active={this.isActiveTab('config')} onClick={this.updateActiveTab('config')} />
           <Menu.Item name="artifacts" active={this.isActiveTab('artifacts')} onClick={this.updateActiveTab('artifacts')} />
           <Menu.Item name="delete" color="red" active={this.isActiveTab('delete')} onClick={this.updateActiveTab('delete')} />
@@ -83,7 +87,7 @@ class EditConfiguration extends React.Component {
             </Menu.Item>
           </Menu.Menu>
         </Menu>
-        <Segment attached="bottom">
+        <Segment attached="bottom" style={this.isActiveTab('delete') ? deleteStyle : {}}>
           {this.getActiveContent()}
         </Segment>
       </div>

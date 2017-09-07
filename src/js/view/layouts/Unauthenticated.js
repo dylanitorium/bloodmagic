@@ -24,8 +24,6 @@ export default () => (
         bloodmagic.
       </Header>
       <GoogleAuthButton />
-      <Divider horizontal> OR </Divider>
-      <GithubAuthButton />
     </Grid.Column>
   </Grid>
 );

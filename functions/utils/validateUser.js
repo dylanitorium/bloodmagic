@@ -4,7 +4,6 @@
  */
 module.exports = (admin) => (
   (req, res, next) => {
-    console.log(req.query);
     let {
       body: {
         token
