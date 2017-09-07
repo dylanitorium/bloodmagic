@@ -3,7 +3,7 @@ import { Route } from 'react-router';
 import { connect } from 'react-redux';
 import NavMenu from '../components/NavMenu';
 import ContentContainer from '../components/ContentContainer';
-import ConfigurationsList from '../containers/configurations/ConfigurationsList';
+import Dashboard from '../containers/Dashboard';
 import ConfigurationsForm from '../containers/configurations/ConfigurationsForm';
 import AddConfiguration from '../containers/configurations/AddConfiguration';
 import EditConfiguration from '../containers/configurations/EditConfiguration';
@@ -25,7 +25,7 @@ class Authenticated extends React.Component {
         <ContentContainer>
           <Route path="/new" component={AddConfiguration} />
           <Route path="/configuration/:id" component={EditConfiguration} />
-          <Route exact path="/" component={ConfigurationsList} />
+          <Route exact path="/" component={Dashboard} />
         </ContentContainer>
       </div>
     );

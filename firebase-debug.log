@@ -82,3 +82,50 @@ Error: Emulator crashed! Check the log file...
 [info] i  hosting: Serving hosting files from: dist
 [info] ✔  hosting: Local server: http://localhost:5000
 
+[debug] [2017-09-07T22:28:08.821Z] ----------------------------------------------------------------------
+[debug] [2017-09-07T22:28:08.836Z] Command:       /Users/deadsalt/.nvm/versions/node/v6.9.4/bin/node /Users/deadsalt/.nvm/versions/node/v6.9.4/bin/firebase serve --only hosting,functions
+[debug] [2017-09-07T22:28:08.837Z] CLI Version:   3.9.2
+[debug] [2017-09-07T22:28:08.837Z] Platform:      darwin
+[debug] [2017-09-07T22:28:08.837Z] Node Version:  v6.9.4
+[debug] [2017-09-07T22:28:08.838Z] Time:          Fri Sep 08 2017 10:28:08 GMT+1200 (NZST)
+[debug] [2017-09-07T22:28:08.838Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-09-07T22:28:08.883Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-09-07T22:28:08.884Z] > authorizing via signed-in user
+[debug] [2017-09-07T22:28:08.899Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-09-07T22:28:08.900Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/CoLBlfuZpal1W7O8QWiq56TZNlv7KWIK1OlieUmu8Cc',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Fri Sep 08 2017 10:28:08 GMT+1200 (NZST)
+[debug] [2017-09-07T22:28:09.418Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-07T22:28:09.421Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bloodmagic-ff7cb  
+ Fri Sep 08 2017 10:28:09 GMT+1200 (NZST)
+[debug] [2017-09-07T22:28:12.314Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-07T22:28:12.319Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bloodmagic-ff7cb/tokens  
+ Fri Sep 08 2017 10:28:12 GMT+1200 (NZST)
+[debug] [2017-09-07T22:28:13.337Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/deadsalt/Projects/bloodmagic/bloodmagic-spells'...
+[info] 
+[info] i  functions: Preparing to emulate HTTPS functions. Support for other event types coming soon.
+[debug] [2017-09-07T22:28:16.233Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/bloodmagic-ff7cb  
+ Fri Sep 08 2017 10:28:16 GMT+1200 (NZST)
+[debug] [2017-09-07T22:28:16.235Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/bloodmagic-ff7cb/apiKeys  
+ Fri Sep 08 2017 10:28:16 GMT+1200 (NZST)
+[debug] [2017-09-07T22:28:16.235Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/bloodmagic-ff7cb  
+ Fri Sep 08 2017 10:28:16 GMT+1200 (NZST)
+[debug] [2017-09-07T22:28:17.955Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-07T22:28:17.999Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-07T22:28:18.031Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-07T22:28:18.033Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/488936304462/clients/_:getWebAppConfig  
+ Fri Sep 08 2017 10:28:18 GMT+1200 (NZST)
+[warn] ⚠  functions: Failed to load functions source code. Ensure that you have the latest SDK by running npm i --save firebase-functions inside the functions directory. Please note that emulation of custom config values are not supported yet. Run firebase serve --only hosting to only serve hosting files.
+
+Error: Emulator crashed! Check the log file...
+[info] i  functions: No HTTPS functions emulated. Support for other function types are coming soon.
+[debug] [2017-09-07T22:28:20.083Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist
+[info] ✔  hosting: Local server: http://localhost:5000
+
