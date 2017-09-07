@@ -127,7 +127,11 @@ class ConfigurationsForm extends Component {
 
   handleSubmit() {
     const user = this.getCurrentUserId();
-    const key = this.props.configuration.key || this.getConfigKeyFromTitle();
+    let key = this.getConfigKeyFromTitle();
+
+    if (this.props.configuration) {
+      key = this.props.configuration.key;
+    }
 
     const data = {
       ...this.state,

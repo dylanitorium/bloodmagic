@@ -102,22 +102,20 @@ export const deleteConfiguration = (id) => (
   (dispatch) => {
     dispatch(deleteConfigurationRequest(id));
 
-    try {
-      // Check ID
-      if (!id) {
-        dispatch(deleteConfigurationFailure('No id'));
-      }
 
-      // Create reference
-      const reference = firebase.database().ref('configurations/' + id);
-
-      // Remove reference
-      reference.remove()
-        .then(() => dispatch(deleteConfigurationSuccess()))
-        .catch(error => dispatch(deleteConfigurationFailure(error)));
-    } catch (error) {
-      dispatch(deleteConfigurationFailure(error));
+    // Check ID
+    if (!id) {
+      dispatch(deleteConfigurationFailure('No id'));
     }
+
+    // Create reference
+    const reference = firebase.database().ref('configurations/' + id);
+
+    // Remove reference
+    reference.remove()
+      .then(() => dispatch(deleteConfigurationSuccess()))
+      .then(() => dispatch(push('/')))
+      .catch(error => dispatch(deleteConfigurationFailure(error)));
   }
 );
 

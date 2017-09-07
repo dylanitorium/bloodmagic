@@ -35,3 +35,50 @@
 
 [info] ✔  functions: createExport: http://localhost:5001/bloodmagic-ff7cb/us-central1/createExport
 [info] ✔  functions: downloadExport: http://localhost:5001/bloodmagic-ff7cb/us-central1/downloadExport
+[debug] [2017-09-07T20:37:38.896Z] ----------------------------------------------------------------------
+[debug] [2017-09-07T20:37:38.899Z] Command:       /Users/deadsalt/.nvm/versions/node/v6.9.4/bin/node /Users/deadsalt/.nvm/versions/node/v6.9.4/bin/firebase serve --only functions,hosting
+[debug] [2017-09-07T20:37:38.899Z] CLI Version:   3.9.2
+[debug] [2017-09-07T20:37:38.900Z] Platform:      darwin
+[debug] [2017-09-07T20:37:38.900Z] Node Version:  v6.9.4
+[debug] [2017-09-07T20:37:38.900Z] Time:          Fri Sep 08 2017 08:37:38 GMT+1200 (NZST)
+[debug] [2017-09-07T20:37:38.900Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-09-07T20:37:38.922Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-09-07T20:37:38.922Z] > authorizing via signed-in user
+[debug] [2017-09-07T20:37:38.925Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-09-07T20:37:38.925Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/CoLBlfuZpal1W7O8QWiq56TZNlv7KWIK1OlieUmu8Cc',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Fri Sep 08 2017 08:37:38 GMT+1200 (NZST)
+[debug] [2017-09-07T20:37:39.400Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-07T20:37:39.405Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bloodmagic-ff7cb  
+ Fri Sep 08 2017 08:37:39 GMT+1200 (NZST)
+[debug] [2017-09-07T20:37:41.731Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-07T20:37:41.733Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bloodmagic-ff7cb/tokens  
+ Fri Sep 08 2017 08:37:41 GMT+1200 (NZST)
+[debug] [2017-09-07T20:37:42.734Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/deadsalt/Projects/bloodmagic/bloodmagic-spells'...
+[info] 
+[info] i  functions: Preparing to emulate HTTPS functions. Support for other event types coming soon.
+[debug] [2017-09-07T20:37:43.489Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/bloodmagic-ff7cb  
+ Fri Sep 08 2017 08:37:43 GMT+1200 (NZST)
+[debug] [2017-09-07T20:37:43.490Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/bloodmagic-ff7cb/apiKeys  
+ Fri Sep 08 2017 08:37:43 GMT+1200 (NZST)
+[debug] [2017-09-07T20:37:43.490Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/bloodmagic-ff7cb  
+ Fri Sep 08 2017 08:37:43 GMT+1200 (NZST)
+[debug] [2017-09-07T20:37:45.233Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-07T20:37:45.233Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/488936304462/clients/_:getWebAppConfig  
+ Fri Sep 08 2017 08:37:45 GMT+1200 (NZST)
+[debug] [2017-09-07T20:37:45.296Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-07T20:37:45.392Z] <<< HTTP RESPONSE 200
+[warn] ⚠  functions: Failed to load functions source code. Ensure that you have the latest SDK by running npm i --save firebase-functions inside the functions directory. Please note that emulation of custom config values are not supported yet. Run firebase serve --only hosting to only serve hosting files.
+
+Error: Emulator crashed! Check the log file...
+[info] i  functions: No HTTPS functions emulated. Support for other function types are coming soon.
+[debug] [2017-09-07T20:37:46.763Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist
+[info] ✔  hosting: Local server: http://localhost:5000
+

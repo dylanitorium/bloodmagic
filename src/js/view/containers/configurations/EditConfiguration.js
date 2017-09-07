@@ -50,7 +50,7 @@ class EditConfiguration extends React.Component {
         return <ArtifactsList configuration={this.getConfiguration()} />;
         break;
       case 'delete':
-        return <DeleteConfiguration configuration={this.getConfiguration()} />
+        return <DeleteConfiguration configuration={this.getConfiguration().key} />
         break;
     }
   }
