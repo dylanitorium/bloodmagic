@@ -195,6 +195,26 @@ function setArtifactRecordAsFailed(firebaseApp, artifactKey) {
   });
 }
 
+const updateUserCount = (user, firebase) => {
+  const ref = firebase.database().ref(`users/${user.uid}`)
+  return new Promise((resolve, reject) => {
+    ref.once('value', (snapshot) => {
+      let {
+        exportCount
+      } = snapshot.val();
+
+      if (!exportCount) {
+        exportCount = 0;
+      }
+
+      exportCount++;
+
+      ref.update({
+        exportCount
+      }, resolve);
+    });
+  })
+};
 
 /**
  * 1. Create a record with a pending status
@@ -205,6 +225,16 @@ function setArtifactRecordAsFailed(firebaseApp, artifactKey) {
  */
 module.exports = (firebaseApp) => (
   (request, response) => {
+
+    const {
+      user,
+    } = request;
+
+    updateUserCount(user, firebaseApp)
+      .catch(() => {
+        response.status(500).end();
+      });
+
     const artifactConfiguration = getArtifactConfigurationFromRequest(request);
     const artifactKey = getArtifactKeyFromRequest(request);
     const artifactType = getArtifactTypeFromConfiguration(artifactConfiguration);

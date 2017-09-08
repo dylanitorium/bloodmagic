@@ -90,7 +90,7 @@ export const createArtifact = (key) => (
       .then(() => firebase.auth().currentUser.getIdToken(true))
       // Trigger the HTTP function
       .then((token) => (
-        fetch('https://us-central1-bloodmagic-ff7cb.cloudfunctions.net/createExport', {
+        fetch('http://localhost:5001/bloodmagic-ff7cb/us-central1/createExport', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -168,7 +168,7 @@ export const downloadArtifact = (key) => (
   (dispatch, getState) => {
     firebase.auth().currentUser.getIdToken(true)
       .then((token) => {
-        window.location = `https://us-central1-bloodmagic-ff7cb.cloudfunctions.net/downloadExport?token=${encodeURIComponent(token)}&artifact=${encodeURIComponent(key)}`;
+        window.location = `http://localhost:5001/bloodmagic-ff7cb/us-central1/downloadExport?token=${encodeURIComponent(token)}&artifact=${encodeURIComponent(key)}`;
       });
   }
 );

@@ -1,131 +1,37 @@
-[debug] [2017-09-07T04:09:53.343Z] ----------------------------------------------------------------------
-[debug] [2017-09-07T04:09:53.346Z] Command:       /Users/deadsalt/.nvm/versions/node/v6.11.2/bin/node /Users/deadsalt/.nvm/versions/node/v6.11.2/bin/firebase serve --only functions,hosting
-[debug] [2017-09-07T04:09:53.346Z] CLI Version:   3.10.0
-[debug] [2017-09-07T04:09:53.346Z] Platform:      darwin
-[debug] [2017-09-07T04:09:53.346Z] Node Version:  v6.11.2
-[debug] [2017-09-07T04:09:53.347Z] Time:          Thu Sep 07 2017 16:09:53 GMT+1200 (NZST)
-[debug] [2017-09-07T04:09:53.347Z] ----------------------------------------------------------------------
+[debug] [2017-09-08T08:39:59.767Z] ----------------------------------------------------------------------
+[debug] [2017-09-08T08:39:59.775Z] Command:       /Users/deadsalt/.nvm/versions/node/v6.11.2/bin/node /Users/deadsalt/.nvm/versions/node/v6.11.2/bin/firebase serve --only functions,hosting
+[debug] [2017-09-08T08:39:59.776Z] CLI Version:   3.10.0
+[debug] [2017-09-08T08:39:59.776Z] Platform:      darwin
+[debug] [2017-09-08T08:39:59.776Z] Node Version:  v6.11.2
+[debug] [2017-09-08T08:39:59.777Z] Time:          Fri Sep 08 2017 20:39:59 GMT+1200 (NZST)
+[debug] [2017-09-08T08:39:59.777Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2017-09-07T04:09:53.370Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2017-09-07T04:09:53.370Z] > authorizing via signed-in user
-[debug] [2017-09-07T04:09:53.374Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bloodmagic-ff7cb  
- Thu Sep 07 2017 16:09:53 GMT+1200 (NZST)
-[debug] [2017-09-07T04:09:54.469Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T04:09:54.471Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bloodmagic-ff7cb/tokens  
- Thu Sep 07 2017 16:09:54 GMT+1200 (NZST)
-[debug] [2017-09-07T04:09:55.416Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-08T08:39:59.823Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-09-08T08:39:59.823Z] > authorizing via signed-in user
+[debug] [2017-09-08T08:39:59.829Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bloodmagic-ff7cb  
+ Fri Sep 08 2017 20:39:59 GMT+1200 (NZST)
+[debug] [2017-09-08T08:40:01.464Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-08T08:40:01.466Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bloodmagic-ff7cb/tokens  
+ Fri Sep 08 2017 20:40:01 GMT+1200 (NZST)
+[debug] [2017-09-08T08:40:03.031Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Serving from '/Users/deadsalt/Projects/bloodmagic/bloodmagic-spells'...
 [info] 
 [info] i  functions: Preparing to emulate HTTPS functions. Support for other event types coming soon.
-[debug] [2017-09-07T04:09:56.016Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/bloodmagic-ff7cb  
- Thu Sep 07 2017 16:09:56 GMT+1200 (NZST)
-[debug] [2017-09-07T04:09:56.017Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/bloodmagic-ff7cb/apiKeys  
- Thu Sep 07 2017 16:09:56 GMT+1200 (NZST)
-[debug] [2017-09-07T04:09:56.017Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/bloodmagic-ff7cb  
- Thu Sep 07 2017 16:09:56 GMT+1200 (NZST)
-[debug] [2017-09-07T04:09:57.350Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T04:09:57.400Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T04:09:58.035Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T04:09:58.036Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/488936304462/clients/_:getWebAppConfig  
- Thu Sep 07 2017 16:09:58 GMT+1200 (NZST)
-[debug] [2017-09-07T04:09:59.306Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-08T08:40:03.513Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/bloodmagic-ff7cb  
+ Fri Sep 08 2017 20:40:03 GMT+1200 (NZST)
+[debug] [2017-09-08T08:40:03.514Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/bloodmagic-ff7cb/apiKeys  
+ Fri Sep 08 2017 20:40:03 GMT+1200 (NZST)
+[debug] [2017-09-08T08:40:03.515Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/bloodmagic-ff7cb  
+ Fri Sep 08 2017 20:40:03 GMT+1200 (NZST)
+[debug] [2017-09-08T08:40:04.990Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-08T08:40:04.991Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/488936304462/clients/_:getWebAppConfig  
+ Fri Sep 08 2017 20:40:04 GMT+1200 (NZST)
+[debug] [2017-09-08T08:40:05.021Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-08T08:40:05.123Z] <<< HTTP RESPONSE 200
+[debug] [2017-09-08T08:40:05.860Z] <<< HTTP RESPONSE 200
 [info] i  hosting: Serving hosting files from: dist
 [info] ✔  hosting: Local server: http://localhost:5000
 
 [info] ✔  functions: createExport: http://localhost:5001/bloodmagic-ff7cb/us-central1/createExport
 [info] ✔  functions: downloadExport: http://localhost:5001/bloodmagic-ff7cb/us-central1/downloadExport
-[debug] [2017-09-07T20:37:38.896Z] ----------------------------------------------------------------------
-[debug] [2017-09-07T20:37:38.899Z] Command:       /Users/deadsalt/.nvm/versions/node/v6.9.4/bin/node /Users/deadsalt/.nvm/versions/node/v6.9.4/bin/firebase serve --only functions,hosting
-[debug] [2017-09-07T20:37:38.899Z] CLI Version:   3.9.2
-[debug] [2017-09-07T20:37:38.900Z] Platform:      darwin
-[debug] [2017-09-07T20:37:38.900Z] Node Version:  v6.9.4
-[debug] [2017-09-07T20:37:38.900Z] Time:          Fri Sep 08 2017 08:37:38 GMT+1200 (NZST)
-[debug] [2017-09-07T20:37:38.900Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2017-09-07T20:37:38.922Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2017-09-07T20:37:38.922Z] > authorizing via signed-in user
-[debug] [2017-09-07T20:37:38.925Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2017-09-07T20:37:38.925Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/CoLBlfuZpal1W7O8QWiq56TZNlv7KWIK1OlieUmu8Cc',
-  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
-  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
-  grant_type: 'refresh_token',
-  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Fri Sep 08 2017 08:37:38 GMT+1200 (NZST)
-[debug] [2017-09-07T20:37:39.400Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T20:37:39.405Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bloodmagic-ff7cb  
- Fri Sep 08 2017 08:37:39 GMT+1200 (NZST)
-[debug] [2017-09-07T20:37:41.731Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T20:37:41.733Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bloodmagic-ff7cb/tokens  
- Fri Sep 08 2017 08:37:41 GMT+1200 (NZST)
-[debug] [2017-09-07T20:37:42.734Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from '/Users/deadsalt/Projects/bloodmagic/bloodmagic-spells'...
-[info] 
-[info] i  functions: Preparing to emulate HTTPS functions. Support for other event types coming soon.
-[debug] [2017-09-07T20:37:43.489Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/bloodmagic-ff7cb  
- Fri Sep 08 2017 08:37:43 GMT+1200 (NZST)
-[debug] [2017-09-07T20:37:43.490Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/bloodmagic-ff7cb/apiKeys  
- Fri Sep 08 2017 08:37:43 GMT+1200 (NZST)
-[debug] [2017-09-07T20:37:43.490Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/bloodmagic-ff7cb  
- Fri Sep 08 2017 08:37:43 GMT+1200 (NZST)
-[debug] [2017-09-07T20:37:45.233Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T20:37:45.233Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/488936304462/clients/_:getWebAppConfig  
- Fri Sep 08 2017 08:37:45 GMT+1200 (NZST)
-[debug] [2017-09-07T20:37:45.296Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T20:37:45.392Z] <<< HTTP RESPONSE 200
-[warn] ⚠  functions: Failed to load functions source code. Ensure that you have the latest SDK by running npm i --save firebase-functions inside the functions directory. Please note that emulation of custom config values are not supported yet. Run firebase serve --only hosting to only serve hosting files.
-
-Error: Emulator crashed! Check the log file...
-[info] i  functions: No HTTPS functions emulated. Support for other function types are coming soon.
-[debug] [2017-09-07T20:37:46.763Z] <<< HTTP RESPONSE 200
-[info] i  hosting: Serving hosting files from: dist
-[info] ✔  hosting: Local server: http://localhost:5000
-
-[debug] [2017-09-07T22:28:08.821Z] ----------------------------------------------------------------------
-[debug] [2017-09-07T22:28:08.836Z] Command:       /Users/deadsalt/.nvm/versions/node/v6.9.4/bin/node /Users/deadsalt/.nvm/versions/node/v6.9.4/bin/firebase serve --only hosting,functions
-[debug] [2017-09-07T22:28:08.837Z] CLI Version:   3.9.2
-[debug] [2017-09-07T22:28:08.837Z] Platform:      darwin
-[debug] [2017-09-07T22:28:08.837Z] Node Version:  v6.9.4
-[debug] [2017-09-07T22:28:08.838Z] Time:          Fri Sep 08 2017 10:28:08 GMT+1200 (NZST)
-[debug] [2017-09-07T22:28:08.838Z] ----------------------------------------------------------------------
-[debug] 
-[debug] [2017-09-07T22:28:08.883Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2017-09-07T22:28:08.884Z] > authorizing via signed-in user
-[debug] [2017-09-07T22:28:08.899Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2017-09-07T22:28:08.900Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/CoLBlfuZpal1W7O8QWiq56TZNlv7KWIK1OlieUmu8Cc',
-  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
-  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
-  grant_type: 'refresh_token',
-  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Fri Sep 08 2017 10:28:08 GMT+1200 (NZST)
-[debug] [2017-09-07T22:28:09.418Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T22:28:09.421Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/bloodmagic-ff7cb  
- Fri Sep 08 2017 10:28:09 GMT+1200 (NZST)
-[debug] [2017-09-07T22:28:12.314Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T22:28:12.319Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/bloodmagic-ff7cb/tokens  
- Fri Sep 08 2017 10:28:12 GMT+1200 (NZST)
-[debug] [2017-09-07T22:28:13.337Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from '/Users/deadsalt/Projects/bloodmagic/bloodmagic-spells'...
-[info] 
-[info] i  functions: Preparing to emulate HTTPS functions. Support for other event types coming soon.
-[debug] [2017-09-07T22:28:16.233Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/bloodmagic-ff7cb  
- Fri Sep 08 2017 10:28:16 GMT+1200 (NZST)
-[debug] [2017-09-07T22:28:16.235Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/bloodmagic-ff7cb/apiKeys  
- Fri Sep 08 2017 10:28:16 GMT+1200 (NZST)
-[debug] [2017-09-07T22:28:16.235Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/bloodmagic-ff7cb  
- Fri Sep 08 2017 10:28:16 GMT+1200 (NZST)
-[debug] [2017-09-07T22:28:17.955Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T22:28:17.999Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T22:28:18.031Z] <<< HTTP RESPONSE 200
-[debug] [2017-09-07T22:28:18.033Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/488936304462/clients/_:getWebAppConfig  
- Fri Sep 08 2017 10:28:18 GMT+1200 (NZST)
-[warn] ⚠  functions: Failed to load functions source code. Ensure that you have the latest SDK by running npm i --save firebase-functions inside the functions directory. Please note that emulation of custom config values are not supported yet. Run firebase serve --only hosting to only serve hosting files.
-
-Error: Emulator crashed! Check the log file...
-[info] i  functions: No HTTPS functions emulated. Support for other function types are coming soon.
-[debug] [2017-09-07T22:28:20.083Z] <<< HTTP RESPONSE 200
-[info] i  hosting: Serving hosting files from: dist
-[info] ✔  hosting: Local server: http://localhost:5000
-

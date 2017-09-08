@@ -7,6 +7,7 @@ import {
   UNAUTH_USER_REQUEST,
   UNAUTH_USER_SUCCESS,
   UNAUTH_USER_FAILURE,
+  GET_EXTRA_DATA_SUCCESS,
 } from './constants';
 
 const setFetching = (state, action) => {
@@ -21,6 +22,13 @@ const setUser = (state, action) => {
     currentUser: action.user,
   });
 };
+
+const setExtraData = (state, action) => {
+  return Object.assign({}, state, {
+    exportCount: action.data.exportCount,
+    downloadCount: action.data.downloadCount,
+  });
+}
 
 const setNoUser = (state, action) => {
   return Object.assign({}, state, {
@@ -40,6 +48,8 @@ export default createReducer({
 
   [UNAUTH_USER_REQUEST]: setFetching,
   [UNAUTH_USER_SUCCESS]: setNoUser,
-  [UNAUTH_USER_FAILURE]: setNoUser
+  [UNAUTH_USER_FAILURE]: setNoUser,
+
+  [GET_EXTRA_DATA_SUCCESS]: setExtraData,
 });
 

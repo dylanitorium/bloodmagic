@@ -11,6 +11,10 @@ import {
   UNAUTH_USER_REQUEST,
   UNAUTH_USER_SUCCESS,
   UNAUTH_USER_FAILURE,
+
+  GET_EXTRA_DATA_REQUEST,
+  GET_EXTRA_DATA_SUCCESS,
+  GET_EXTRA_DATA_FAILURE
 } from './constants';
 
 
@@ -63,6 +67,34 @@ export const endAuthentication = () => (
       .catch((error) => {
         dispatch(endAuthenticationFailure(error));
       })
+  }
+);
+
+const getExtraDataRequest = makeActionCreator(GET_EXTRA_DATA_REQUEST);
+const getExtraDataSuccess = makeActionCreator(GET_EXTRA_DATA_SUCCESS, 'data');
+const getExtraDataFailure = makeActionCreator(GET_EXTRA_DATA_FAILURE, 'error');
+
+export const getExtraData = () => (
+  (dispatch, getState) => {
+    dispatch(getExtraDataRequest);
+
+    // Get current user from state (but catch any errors)
+    try {
+      const {user: {currentUser: {uid}}} = getState();
+      if (!uid) {
+        dispatch(getExtraDataFailure('No user'));
+      }
+
+      // Get reference
+      const reference = firebase.database().ref(`users/${uid}`);
+
+      // Then listen for changes (this does fire initially)
+      reference.on('value', (snapshot) => {
+        dispatch(getExtraDataSuccess(snapshot.val()));
+      });
+    } catch (error) {
+      dispatch(getExtraDataFailure(error));
+    }
   }
 );
 

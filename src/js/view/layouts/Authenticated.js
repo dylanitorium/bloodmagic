@@ -9,12 +9,14 @@ import AddConfiguration from '../containers/configurations/AddConfiguration';
 import EditConfiguration from '../containers/configurations/EditConfiguration';
 import { getConfigurations } from '../../state/configurations/actions';
 import { getArtifacts } from '../../state/artifacts/actions';
+import { getExtraData } from '../../state/user/actions';
 
 class Authenticated extends React.Component {
   componentDidMount() {
-    const { getConfigurations, getArtifacts } = this.props;
+    const { getConfigurations, getArtifacts, getExtraData } = this.props;
     getConfigurations();
     getArtifacts();
+    getExtraData();
   }
 
   render() {
@@ -37,5 +39,6 @@ export default connect(
   {
     getConfigurations,
     getArtifacts,
+    getExtraData,
   }
 )(Authenticated);
