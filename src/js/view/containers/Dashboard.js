@@ -5,10 +5,31 @@ import ConfigurationsList from './configurations/ConfigurationsList';
 import _ from 'lodash';
 import config from '../../config';
 
-const formatMegaBytes = (bytes) => `${Math.ceil(parseFloat(bytes / 10000000))}`
+const formatMegaBytes = (bytes, decimals) => `${parseFloat(bytes / 1000000).toFixed(decimals)}`
 
 const getConfigsCount = list => _.size(list);
-const getTotalSize = list => formatMegaBytes(_.reduce(list, (sum, item) => item.metadata ?  item.metadata.size + sum : 0, 0));
+const getTotalSize = (list) => {
+  const reduction = _.reduce(list, (accumulator, item) => {
+    let addition = 0;
+    if (item.metadata) {
+      addition = parseInt(item.metadata.size, 10);
+    }
+
+    if (isNaN(parseInt(accumulator, 10))) {
+      const firstItem = accumulator;
+      let initial = 0;
+      if (firstItem.metadata) {
+        initial = parseInt(firstItem.metadata.size, 10);
+      }
+      return initial + addition;
+    }
+
+    return addition + accumulator;
+  });
+
+  console.log('reduction', reduction);
+  return formatMegaBytes(reduction, 1);
+}
 const getRunsCount = (user) => user.exportCount;
 const getDownloadsCount = (user) => user.downloadCount;
 
@@ -27,7 +48,7 @@ const Dashboard = ({ artifacts, configurations, user }) => (
           <Grid.Column textAlign={"center"}>
             <Statistic
               size="small"
-              value={`${getTotalSize(artifacts)} / ${formatMegaBytes(config.MAX_ARTIFACT_SIZE)}`}
+              value={`${getTotalSize(artifacts)} / ${formatMegaBytes(config.MAX_ARTIFACT_SIZE, 0)}`}
               label="Artifact Capacity (mb)"
             />
           </Grid.Column>

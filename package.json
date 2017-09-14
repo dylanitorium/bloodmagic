@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "start": "rigor -s ./dist",
-    "watch": "webpack --watch"
+    "start": "firebase serve --only functions,hosting",
+    "watch": "webpack --watch",
+    "deply": "firebase deploy"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.1",

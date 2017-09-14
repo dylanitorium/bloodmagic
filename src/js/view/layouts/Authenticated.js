@@ -20,7 +20,6 @@ class Authenticated extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <NavMenu />
@@ -32,7 +31,7 @@ class Authenticated extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default connect(
   () => ({}),
