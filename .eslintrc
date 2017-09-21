@@ -1,0 +1,29 @@
+{
+  "extends":[
+    "airbnb"
+  ],
+  "globals":{
+    "window":true,
+    "document":true,
+    "fetch":true,
+    "location":true
+  },
+  "rules":{
+    "react/jsx-filename-extension": "off",
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "no-console": "off",
+    "no-param-reassign": ["error", { "props": false }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": [
+          "node_modules",
+          "src/js",
+          "src/js/lib"
+        ]
+      }
+    }
+  }
+}
